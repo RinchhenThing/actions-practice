@@ -1,0 +1,12 @@
+name: Env Example
+
+on: [push]
+
+jobs:
+    print-env:
+        runs-on: ubuntu-latest
+        env:
+            APP_mode: "developement"
+        steps:
+            - name: Print environment variable
+              run: echo "App mode is $APP_MODE"
