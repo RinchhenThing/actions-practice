@@ -1,10 +1,13 @@
-name: Caller Workflow
+# .github/workflows/caller.yml
+name: Call Reusable Build
 
-on:
-    push:
-        branches: [main]
+on: [push]
 
 jobs:
-    call-build:
-        uses: ./.github/workflows/reusable-build.yml
-        
+  call-build:
+    uses: ./.github/workflows/reusable-build.yml
+    with:
+      mode: "production"
+    
+    secrets:
+        MY_SECRET: ${{ secrets.MY_SECRET }}
