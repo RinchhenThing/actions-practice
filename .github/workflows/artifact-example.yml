@@ -1,0 +1,24 @@
+name: Artifact Example
+
+on: [push]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - run: echo "This is a test log" > test.log
+            - uses: actions/upload-artifact@v3
+              with:
+                    name: test-logs
+                    path: test.log
+    
+    analyze:
+        runs-on: ubuntu-latest
+        needs: build
+        steps:
+            - uses: actions/download-artifact@v3
+              with:
+                name: test-logs
+                path: ./logs
+            - run: cat ./logs/test.log
+            

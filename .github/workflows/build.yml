@@ -10,6 +10,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Dependencies
-        run: npm install
-      - name: Build Project
-        run: npm run build
+        run: |
+          npm install
+          npm run build 
+      - name: Upload build output 
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-output
+          path: build/
+      - name: Download build output
+        uses: actions/download-artifact@v3
+        with:
+          name: build-output
+          path: ./downloaded
